@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conte como a alta dos preços de consoles, jogos e hardware mudou seus planos.">
+  <title>Participe | IA em Jogo</title>
+</head>
+<body>
+  <a href="#conteudo">Pular para o conteúdo principal</a>
+
+  <header id="topo">
+    <a href="index.html">
+      <img src="img/logo.svg" alt="" width="48" height="48">
+      IA em Jogo
+    </a>
+    <p>Como a inteligência artificial está mudando o preço da diversão</p>
+
+    <nav aria-label="Menu principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="ia.html">O boom da IA</a></li>
+        <li><a href="hardware.html">Hardware</a></li>
+        <li><a href="consoles-jogos.html">Consoles e jogos</a></li>
+        <li><a href="participe.html" aria-current="page">Participe</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <h1>Participe: conte como os preços mexeram com você</h1>
+    <p>
+      Queremos saber se a alta de consoles, jogos e peças de computador mudou os seus planos.
+      Os campos marcados como obrigatórios precisam ser preenchidos antes do envio.
+    </p>
+
+    <section aria-labelledby="titulo-formulario">
+      <h2 id="titulo-formulario">Formulário de participação</h2>
+
+      <!-- Todo campo tem <label> ligado pelo for/id; grupos de opções ficam em <fieldset> com <legend> -->
+      <form action="obrigado.html" method="post">
+        <p>
+          <label for="nome">Nome (obrigatório)</label>
+          <input type="text" id="nome" name="nome" autocomplete="name" minlength="2" maxlength="80" required>
+        </p>
+
+        <p>
+          <label for="email">E-mail (obrigatório)</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </p>
+
+        <fieldset>
+          <legend>Você adiou ou desistiu de alguma compra por causa dos preços em 2026? (obrigatório)</legend>
+          <input type="radio" id="adiou-sim" name="adiou" value="sim" required>
+          <label for="adiou-sim">Sim</label>
+          <input type="radio" id="adiou-nao" name="adiou" value="nao">
+          <label for="adiou-nao">Não</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>O que você deixou de comprar? (opcional)</legend>
+          <input type="checkbox" id="item-console" name="itens" value="console">
+          <label for="item-console">Console</label>
+          <input type="checkbox" id="item-gpu" name="itens" value="placa-de-video">
+          <label for="item-gpu">Placa de vídeo</label>
+          <input type="checkbox" id="item-memoria" name="itens" value="memoria-ssd">
+          <label for="item-memoria">Memória RAM ou SSD</label>
+          <input type="checkbox" id="item-jogos" name="itens" value="jogos">
+          <label for="item-jogos">Jogos</label>
+          <input type="checkbox" id="item-celular" name="itens" value="celular-notebook">
+          <label for="item-celular">Celular ou notebook</label>
+        </fieldset>
+
+        <p>
+          <label for="plataforma">Onde você mais joga? (obrigatório)</label>
+          <select id="plataforma" name="plataforma" required>
+            <option value="">Selecione</option>
+            <option value="pc">Computador</option>
+            <option value="playstation">PlayStation</option>
+            <option value="xbox">Xbox</option>
+            <option value="nintendo">Nintendo</option>
+            <option value="celular">Celular</option>
+            <option value="nao-jogo">Não jogo</option>
+          </select>
+        </p>
+
+        <p>
+          <label for="opiniao">Sua opinião (opcional)</label>
+          <textarea id="opiniao" name="opiniao" rows="5" cols="40" minlength="10" maxlength="500" aria-describedby="dica-opiniao"></textarea>
+        </p>
+        <p id="dica-opiniao">Escreva entre 10 e 500 caracteres.</p>
+
+        <p>
+          <input type="checkbox" id="concordo" name="concordo" required>
+          <label for="concordo">Concordo que minha resposta seja usada de forma anônima neste projeto acadêmico (obrigatório)</label>
+        </p>
+
+        <button type="submit">Enviar participação</button>
+      </form>
+    </section>
+  </main>
+
+  <aside aria-labelledby="titulo-privacidade">
+    <h2 id="titulo-privacidade">Como usamos suas respostas</h2>
+    <p>
+      Este é um projeto acadêmico sem servidor: as respostas não são gravadas em lugar nenhum. O
+      formulário mostra a validação nativa do HTML, que confere os campos antes do envio.
+    </p>
+  </aside>
+
+  <footer>
+    <p><strong>IA em Jogo</strong>: como a inteligência artificial está mudando o preço da diversão.</p>
+    <p><small>Projeto Integrador · Interface Web com HTML e CSS · UNIVÁS · 2026. Conteúdo com fins acadêmicos.</small></p>
+    <a href="#topo">Voltar ao topo</a>
+  </footer>
+</body>
+</html>
