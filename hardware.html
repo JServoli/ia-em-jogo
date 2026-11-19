@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Como a demanda da inteligência artificial fez disparar o preço da memória RAM, das placas de vídeo e de outros componentes.">
   <title>Hardware | IA em Jogo</title>
+  <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-  <a href="#conteudo">Pular para o conteúdo principal</a>
+  <a class="pular" href="#conteudo">Pular para o conteúdo principal</a>
 
   <header id="topo">
-    <a href="index.html">
+    <a class="logo" href="index.html">
       <img src="img/logo.svg" alt="" width="48" height="48">
       IA em Jogo
     </a>
@@ -44,43 +45,46 @@
       </p>
 
       <!-- Dados tabulares: <caption> dá o título da tabela e <th scope> liga cada célula ao cabeçalho -->
-      <table>
-        <caption>Alta no preço da memória entre 2025 e 2026</caption>
-        <thead>
-          <tr>
-            <th scope="col">Período</th>
-            <th scope="col">Variação</th>
-            <th scope="col">O que foi medido</th>
-            <th scope="col">Fonte</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">4º trimestre de 2025</th>
-            <td>+50%</td>
-            <td>Preço das memórias no mercado</td>
-            <td><a href="#fonte-1">Tecnoblog</a></td>
-          </tr>
-          <tr>
-            <th scope="row">1º trimestre de 2026</th>
-            <td>+80% a 90%</td>
-            <td>Preço das memórias em relação ao trimestre anterior (Counterpoint Research)</td>
-            <td><a href="#fonte-2">FXStreet</a></td>
-          </tr>
-          <tr>
-            <th scope="row">De 2025 a 2026</th>
-            <td>Até +500%</td>
-            <td>Kits de memória DDR5 de maior capacidade nos Estados Unidos</td>
-            <td><a href="#fonte-3">Tecnoblog</a></td>
-          </tr>
-          <tr>
-            <th scope="row">2026</th>
-            <td>+120% a 180%</td>
-            <td>Memória DDR4, procurada por quem fugia do preço da DDR5</td>
-            <td><a href="#fonte-4">Einerd</a></td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- div.tabela: rola só a tabela no celular estreito; tabindex deixa rolar pelo teclado -->
+      <div class="tabela" role="region" aria-labelledby="legenda-memoria" tabindex="0">
+        <table>
+          <caption id="legenda-memoria">Alta no preço da memória entre 2025 e 2026</caption>
+          <thead>
+            <tr>
+              <th scope="col">Período</th>
+              <th scope="col">Variação</th>
+              <th scope="col">O que foi medido</th>
+              <th scope="col">Fonte</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">4º trimestre de 2025</th>
+              <td>+50%</td>
+              <td>Preço das memórias no mercado</td>
+              <td><a href="#fonte-1">Tecnoblog</a></td>
+            </tr>
+            <tr>
+              <th scope="row">1º trimestre de 2026</th>
+              <td>+80% a 90%</td>
+              <td>Preço das memórias em relação ao trimestre anterior (Counterpoint Research)</td>
+              <td><a href="#fonte-2">FXStreet</a></td>
+            </tr>
+            <tr>
+              <th scope="row">De 2025 a 2026</th>
+              <td>Até +500%</td>
+              <td>Kits de memória DDR5 de maior capacidade nos Estados Unidos</td>
+              <td><a href="#fonte-3">Tecnoblog</a></td>
+            </tr>
+            <tr>
+              <th scope="row">2026</th>
+              <td>+120% a 180%</td>
+              <td>Memória DDR4, procurada por quem fugia do preço da DDR5</td>
+              <td><a href="#fonte-4">Einerd</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <p>
         A Micron, uma das três grandes fabricantes, avisou que os preços não devem melhorar antes de

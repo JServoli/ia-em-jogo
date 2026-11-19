@@ -1,0 +1,665 @@
+/* ==========================================================
+   IA em Jogo — estilo.css (Entrega 2: estilo e responsividade)
+
+   Abordagem: mobile first. As regras sem media query descrevem o
+   celular (até ~480px); cada @media acrescenta o que muda numa tela
+   maior: tablet (768px ou mais) e desktop (1200px ou mais).
+   As media queries ficam no fim do arquivo (seção 12).
+
+   Convenção de classes: nomes em português, minúsculas, sem acento
+   e com hífen (.pular, .logo, .destaques, .numeros, .aceite, .dica).
+   Classe só onde o seletor de elemento não basta; o resto usa os
+   próprios elementos semânticos (header, nav, main, aside, footer).
+   ========================================================== */
+
+/* 1. Variáveis: cores e espaçamentos centrais do projeto
+   Contraste conferido (WCAG): texto >= 4.5:1, bordas e foco >= 3:1.
+   Os valores medidos estão em docs/entrega-2.md. */
+:root {
+  --cor-fundo: #f1f5f9;          /* fundo da página fora do conteúdo */
+  --cor-superficie: #ffffff;     /* cartões, seções e tabelas */
+  --cor-superficie-2: #f8fafc;   /* cartões dentro de cartões */
+  --cor-texto: #1f2937;          /* 14.7:1 no branco */
+  --cor-texto-suave: #4b5563;    /* 7.6:1 no branco */
+  --cor-primaria: #1e1b4b;       /* cabeçalho e rodapé (mesma cor do logo) */
+  --cor-primaria-2: #312e81;     /* botões do menu */
+  --cor-destaque: #22d3ee;       /* ciano do logo: 8.9:1 na primária */
+  --cor-link: #4338ca;           /* 7.9:1 no branco */
+  --cor-link-hover: #312e81;
+  --cor-borda: #e2e8f0;          /* borda decorativa dos cartões */
+  --cor-borda-campo: #64748b;    /* contorno dos campos: 4.8:1 no branco */
+  --cor-foco: #ea580c;           /* indicador de foco: 3.6:1 no branco, 4.5:1 na primária */
+  --cor-erro: #b91c1c;
+
+  --espaco-1: 0.5rem;
+  --espaco-2: 1rem;
+  --espaco-3: 1.5rem;
+  --espaco-4: 2rem;
+
+  --raio: 0.5rem;
+  --largura-max: 75rem;          /* 1200px */
+  --largura-lateral: 18.75rem;   /* 300px do aside no desktop */
+  --fonte: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* 2. Base */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--cor-fundo);
+}
+
+body {
+  margin: 0 auto;
+  max-width: var(--largura-max);
+  font-family: var(--fonte);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  color: var(--cor-primaria);
+}
+
+h1 {
+  font-size: clamp(1.75rem, 1rem + 3vw, 2.5rem);
+  margin: var(--espaco-3) 0 var(--espaco-2);
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 0 0 var(--espaco-2);
+  padding-left: 0.75rem;
+  border-left: 4px solid var(--cor-destaque);
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin: var(--espaco-3) 0 var(--espaco-1);
+}
+
+p {
+  margin: 0 0 var(--espaco-2);
+}
+
+a {
+  color: var(--cor-link);
+  overflow-wrap: break-word; /* links longos das fontes não estouram no celular */
+}
+
+a:hover {
+  color: var(--cor-link-hover);
+  text-decoration-thickness: 2px;
+}
+
+/* Foco visível em todo elemento focável (navegação por teclado).
+   Nunca usamos outline: none. */
+:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+
+/* 3. Layout da página (Grid): uma coluna no celular */
+body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); /* minmax(0, …) impede que uma tabela larga estique a página */
+  grid-template-areas:
+    "topo"
+    "conteudo"
+    "lateral"
+    "rodape";
+  gap: var(--espaco-3);
+}
+
+header { grid-area: topo; }
+main   { grid-area: conteudo; }
+aside  { grid-area: lateral; }
+footer { grid-area: rodape; }
+
+main,
+aside {
+  margin: 0 var(--espaco-2);
+}
+
+/* 4. Skip link: escondido fora da tela até receber foco pelo Tab */
+.pular {
+  position: absolute;
+  top: var(--espaco-1);
+  left: var(--espaco-1);
+  z-index: 10;
+  padding: var(--espaco-1) var(--espaco-2);
+  background-color: var(--cor-superficie);
+  color: var(--cor-link);
+  font-weight: 700;
+  border-radius: var(--raio);
+  transform: translateY(-200%);
+}
+
+.pular:focus {
+  transform: translateY(0);
+}
+
+/* 5. Cabeçalho (Grid fora) e menu (Flexbox dentro) */
+header {
+  display: grid;
+  grid-template-areas:
+    "logo"
+    "slogan"
+    "menu";
+  gap: var(--espaco-1);
+  padding: var(--espaco-2);
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.logo {
+  grid-area: logo;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--cor-destaque);
+}
+
+header > p {
+  grid-area: slogan;
+  margin: 0;
+  color: #cbd5e1;
+}
+
+header nav {
+  grid-area: menu;
+  margin-top: var(--espaco-1);
+}
+
+header nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header nav li {
+  flex-grow: 1; /* no celular cada linha do menu fica cheia */
+}
+
+header nav a {
+  display: block;
+  min-height: 2.75rem; /* 44px: área de toque confortável */
+  padding: 0.6rem var(--espaco-2);
+  border-radius: var(--raio);
+  background-color: var(--cor-primaria-2);
+  color: #ffffff;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+header nav a[aria-current="page"] {
+  background-color: var(--cor-destaque);
+  color: var(--cor-primaria);
+}
+
+/* 6. Conteúdo: seções e artigos viram cartões */
+main section,
+aside {
+  margin-bottom: var(--espaco-3);
+  padding: var(--espaco-3) 0.75rem; /* lateral menor no celular: sobra largura para as tabelas */
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+
+main section:last-child {
+  margin-bottom: 0;
+}
+
+main section h1 {
+  margin-top: 0;
+}
+
+article {
+  margin-top: var(--espaco-2);
+  padding: 0.75rem;
+  background-color: var(--cor-superficie-2);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+
+article h3 {
+  margin-top: 0;
+}
+
+article > :last-child {
+  margin-bottom: 0;
+}
+
+/* Destaques da home: grade que decide sozinha quantas colunas cabem */
+.destaques {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--espaco-2);
+}
+
+.destaques > h2 {
+  grid-column: 1 / -1; /* o título ocupa a linha toda */
+  margin-bottom: 0;
+}
+
+.destaques article {
+  margin-top: 0;
+}
+
+/* Listas de fontes e listas comuns */
+main ol,
+main ul {
+  padding-left: 1.25rem;
+}
+
+main li {
+  margin-bottom: var(--espaco-1);
+}
+
+li::marker {
+  color: var(--cor-link);
+}
+
+/* Perguntas frequentes */
+details {
+  margin-bottom: var(--espaco-1);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie-2);
+}
+
+summary {
+  padding: 0.75rem var(--espaco-2);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+details[open] summary {
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+details p {
+  margin: 0;
+  padding: 0.75rem var(--espaco-2);
+}
+
+/* 7. Tabelas
+   div.tabela: se a tela for mais estreita que a tabela, só ela rola na
+   horizontal; a página continua sem rolagem lateral. */
+.tabela {
+  margin: var(--espaco-2) 0;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem; /* 13px no celular para as 4 colunas caberem em 375px */
+}
+
+caption {
+  margin-bottom: var(--espaco-1);
+  font-weight: 700;
+  text-align: left;
+  color: var(--cor-primaria);
+}
+
+th,
+td {
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--cor-borda);
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--cor-fundo);
+}
+
+/* 8. Gráficos */
+figure {
+  margin: var(--espaco-3) 0;
+}
+
+figure img {
+  display: block;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+
+figcaption {
+  margin-top: var(--espaco-1);
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+/* 9. Lateral (aside): glossário e números */
+aside h2 {
+  font-size: 1.25rem;
+}
+
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: 700;
+  color: var(--cor-primaria);
+}
+
+dd {
+  margin: 0 0 var(--espaco-2);
+}
+
+/* "A crise em números": o valor aparece grande, o termo vira legenda */
+.numeros {
+  display: grid;
+  gap: 0 var(--espaco-2);
+}
+
+.numeros dt {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+.numeros dd {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--cor-link);
+}
+
+/* Container query: o aside olha a própria largura, não a da tela.
+   Largo (celular deitado, tablet): termo e valor lado a lado.
+   Estreito (lateral do desktop): um embaixo do outro. */
+aside {
+  container-type: inline-size;
+}
+
+@container (min-width: 32rem) {
+  .numeros {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: baseline;
+  }
+}
+
+/* 10. Formulário */
+form > p label,
+.aceite label {
+  font-weight: 600;
+}
+
+form > p > label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit; /* campos não herdam a fonte do body sozinhos */
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--cor-borda-campo);
+  border-radius: 0.375rem;
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Campo inválido só depois que a pessoa interagiu ou tentou enviar */
+input:user-invalid,
+select:user-invalid,
+textarea:user-invalid {
+  border-color: var(--cor-erro);
+  border-width: 2px;
+}
+
+/* Grupos de opções: cada rádio ou checkbox ao lado do seu label */
+fieldset {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.75rem var(--espaco-1);
+  margin: 0 0 var(--espaco-2);
+  padding: var(--espaco-2);
+  border: 1px solid var(--cor-borda-campo);
+  border-radius: var(--raio);
+}
+
+legend {
+  padding: 0 0.25rem;
+  font-weight: 600;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  accent-color: var(--cor-link);
+}
+
+.aceite {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaco-1);
+}
+
+.aceite input {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.dica {
+  margin-top: -0.75rem;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+button {
+  min-height: 2.75rem;
+  padding: 0.75rem var(--espaco-3);
+  border: 0;
+  border-radius: var(--raio);
+  background-color: var(--cor-link);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--cor-link-hover);
+}
+
+/* 11. Rodapé (Flexbox) */
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-1);
+  padding: var(--espaco-3) var(--espaco-2);
+  background-color: var(--cor-primaria);
+  color: #e2e8f0;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer strong {
+  color: #ffffff;
+}
+
+footer a {
+  align-self: flex-start;
+  color: var(--cor-destaque);
+  font-weight: 600;
+}
+
+footer a:hover {
+  color: #ffffff;
+}
+
+/* 12. Media queries (sempre no fim: mesma especificidade, vence a última) */
+
+/* Tablet: 768px ou mais */
+@media (min-width: 768px) {
+  header {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "logo slogan"
+      "menu menu";
+    align-items: center;
+    column-gap: var(--espaco-3);
+    padding: var(--espaco-2) var(--espaco-3);
+  }
+
+  header > p {
+    text-align: right;
+  }
+
+  header nav li {
+    flex-grow: 0; /* o menu vira uma linha só, do tamanho do texto */
+  }
+
+  main,
+  aside {
+    margin: 0 var(--espaco-3);
+  }
+
+  main section,
+  aside {
+    padding: var(--espaco-3);
+  }
+
+  article {
+    padding: var(--espaco-2);
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Duas opções por linha nos grupos de rádio e checkbox */
+  fieldset {
+    grid-template-columns: auto 1fr auto 1fr;
+  }
+
+  footer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--espaco-3);
+  }
+
+  footer p:first-child {
+    flex-basis: 100%;
+  }
+
+  footer a {
+    align-self: center;
+  }
+}
+
+/* Desktop: 1200px ou mais. O aside sobe para a lateral. */
+@media (min-width: 1200px) {
+  body {
+    grid-template-columns: minmax(0, 1fr) var(--largura-lateral);
+    grid-template-areas:
+      "topo     topo"
+      "conteudo lateral"
+      "rodape   rodape";
+    column-gap: 0;
+  }
+
+  header {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "logo   menu"
+      "slogan menu";
+    border-radius: 0 0 var(--raio) var(--raio);
+  }
+
+  header > p {
+    text-align: left;
+  }
+
+  header nav {
+    margin-top: 0;
+  }
+
+  header nav ul {
+    justify-content: flex-end;
+  }
+
+  main {
+    margin-right: var(--espaco-3);
+  }
+
+  aside {
+    align-self: start; /* a lateral fica do tamanho do conteúdo, sem esticar até o rodapé */
+    margin: 0 var(--espaco-3) 0 0;
+  }
+
+  footer {
+    border-radius: var(--raio) var(--raio) 0 0;
+  }
+}
+
+/* Quem pede menos animação no sistema não vê transição no skip link */
+@media (prefers-reduced-motion: no-preference) {
+  .pular {
+    transition: transform 0.2s;
+  }
+}

@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Os reajustes de PlayStation 5, Nintendo Switch 2 e Xbox em 2026 e o novo patamar de preço dos jogos.">
   <title>Consoles e jogos | IA em Jogo</title>
+  <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-  <a href="#conteudo">Pular para o conteúdo principal</a>
+  <a class="pular" href="#conteudo">Pular para o conteúdo principal</a>
 
   <header id="topo">
-    <a href="index.html">
+    <a class="logo" href="index.html">
       <img src="img/logo.svg" alt="" width="48" height="48">
       IA em Jogo
     </a>
@@ -49,43 +50,46 @@
           tarifas. Foi o segundo aumento em menos de um ano.
         </p>
 
-        <table>
-          <caption>Preço sugerido da linha PlayStation 5 no Brasil</caption>
-          <thead>
-            <tr>
-              <th scope="col">Modelo</th>
-              <th scope="col">Antes</th>
-              <th scope="col">Desde 02/04/2026</th>
-              <th scope="col">Aumento</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">PS5 com leitor de disco</th>
-              <td>R$ 4.499,90</td>
-              <td>R$ 5.099,90</td>
-              <td>13,3%</td>
-            </tr>
-            <tr>
-              <th scope="row">PS5 Edição Digital</th>
-              <td>R$ 3.999,90</td>
-              <td>R$ 4.599,90</td>
-              <td>15,0%</td>
-            </tr>
-            <tr>
-              <th scope="row">PS5 Pro</th>
-              <td>R$ 6.999,90</td>
-              <td>R$ 7.499,90</td>
-              <td>7,1%</td>
-            </tr>
-            <tr>
-              <th scope="row">PlayStation Portal</th>
-              <td>R$ 1.499,90</td>
-              <td>R$ 1.899,90</td>
-              <td>26,7%</td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- div.tabela: rola só a tabela no celular estreito; tabindex deixa rolar pelo teclado -->
+        <div class="tabela" role="region" aria-labelledby="legenda-ps5" tabindex="0">
+          <table>
+            <caption id="legenda-ps5">Preço sugerido da linha PlayStation 5 no Brasil</caption>
+            <thead>
+              <tr>
+                <th scope="col">Modelo</th>
+                <th scope="col">Antes</th>
+                <th scope="col">Desde 02/04/2026</th>
+                <th scope="col">Aumento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">PS5 com leitor de disco</th>
+                <td>R$ 4.499,90</td>
+                <td>R$ 5.099,90</td>
+                <td>13,3%</td>
+              </tr>
+              <tr>
+                <th scope="row">PS5 Edição Digital</th>
+                <td>R$ 3.999,90</td>
+                <td>R$ 4.599,90</td>
+                <td>15,0%</td>
+              </tr>
+              <tr>
+                <th scope="row">PS5 Pro</th>
+                <td>R$ 6.999,90</td>
+                <td>R$ 7.499,90</td>
+                <td>7,1%</td>
+              </tr>
+              <tr>
+                <th scope="row">PlayStation Portal</th>
+                <td>R$ 1.499,90</td>
+                <td>R$ 1.899,90</td>
+                <td>26,7%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure>
           <img src="img/grafico-ps5-brasil.svg" width="640" height="360"
