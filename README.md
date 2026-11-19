@@ -24,7 +24,10 @@ O site explica uma corrente de causa e efeito, com números e fontes em cada pá
 
 ## Regras técnicas adotadas
 
-- HTML5 puro na Entrega 1: sem CSS, sem JavaScript e sem frameworks.
+- HTML5 e CSS próprio: sem JavaScript e sem frameworks (nada de Bootstrap, Tailwind ou Bulma).
+- CSS num arquivo externo, `css/estilo.css`, com cores e espaçamentos em variáveis no `:root`.
+- Mobile first: Grid para a página, Flexbox dentro de cada parte e 3 larguras (celular, tablet a
+  partir de 768px, desktop a partir de 1200px).
 - `<header>`, `<nav>`, `<main>` e `<footer>` em todas as páginas; `<aside>` para conteúdo
   complementar.
 - Um único `<h1>` por página, sem pular nível de título.
@@ -33,10 +36,14 @@ O site explica uma corrente de causa e efeito, com números e fontes em cada pá
 - Tabelas com `<caption>` e `<th scope>`; gráficos em `<figure>` com `alt` que descreve os números.
 - Formulário com `<label>` em todos os campos, `<fieldset>`/`<legend>` nos grupos de opções e
   validação nativa do HTML5.
+- Foco visível em todo elemento (`:focus-visible`), skip link que aparece no primeiro Tab e
+  contraste mínimo de 4.5:1 em todo texto.
 - Todo número do site tem a fonte listada no fim da página onde aparece.
-- Nomes de arquivos em minúsculas, sem acento e sem espaço.
+- Nomes de arquivos em minúsculas, sem acento e sem espaço; classes CSS em português, minúsculas e
+  com hífen (`.pular`, `.destaques`, `.tabela`).
 
-As justificativas de cada decisão estão em [docs/entrega-1.md](docs/entrega-1.md).
+As justificativas de cada decisão estão em [docs/entrega-1.md](docs/entrega-1.md) (estrutura) e
+[docs/entrega-2.md](docs/entrega-2.md) (estilo e responsividade).
 
 ## Páginas
 
@@ -59,18 +66,20 @@ ia-em-jogo/
 ├── consoles-jogos.html
 ├── participe.html
 ├── obrigado.html
+├── css/
+│   └── estilo.css                    estilo único das 6 páginas (Entrega 2)
 ├── img/
 │   ├── logo.svg
 │   ├── grafico-chatgpt.svg
 │   └── grafico-ps5-brasil.svg
 ├── docs/
 │   ├── entrega-1.md                  decisões de estrutura, checklist e validação
-│   └── registro-uso-ia-entrega-1.md
+│   ├── entrega-2.md                  breakpoints, layout, variáveis, contraste e testes
+│   ├── registro-uso-ia-entrega-1.md
+│   └── registro-uso-ia-entrega-2.md
 ├── .gitignore
 └── README.md
 ```
-
-O `css/` entra na Entrega 2.
 
 ## Planejamento por entregas
 
@@ -100,10 +109,26 @@ sem `<label>`.
 
 ### Entrega 2 - Estilo e responsividade
 
-- [ ] Criar `css/estilo.css` e ligar nas 6 páginas.
-- [ ] Decidir e justificar mobile-first ou desktop-first.
-- [ ] Montar o layout com Flexbox/Grid, variáveis CSS e 3 breakpoints.
-- [ ] Esconder o skip link até ele receber foco.
+- [x] Criar `css/estilo.css` e ligar nas 6 páginas.
+- [x] Decidir e justificar mobile-first ou desktop-first (mobile first).
+- [x] Definir cores e espaçamentos em variáveis CSS no `:root`.
+- [x] Montar o layout da página com Grid (`grid-template-areas`) e as partes com Flexbox.
+- [x] Fazer funcionar nos 3 breakpoints: celular, tablet (768px) e desktop (1200px).
+- [x] Esconder o skip link até ele receber foco.
+- [x] Mostrar o foco do teclado com `:focus-visible` em todo elemento.
+- [x] Conferir o contraste de todas as cores (texto 4.5:1, bordas e foco 3:1).
+- [x] Testar de 320 a 1440px sem rolagem horizontal na página.
+
+#### Validação no W3C
+
+Em 19/11/2026: **0 erros e 0 avisos** no HTML das 6 páginas. No CSS, o validador só acusa a
+container query (`container-type` e `@container`), que ele ainda não reconhece; detalhes em
+[docs/entrega-2.md](docs/entrega-2.md).
+
+#### Teste manual do grupo
+
+- [ ] Abrir o site no próprio celular e conferir menu, tabelas e formulário.
+- [ ] Arrastar a largura no DevTools e ver se algo quebra entre os breakpoints.
 
 ### Entrega 3 - Formulário e refinamento
 
@@ -126,22 +151,21 @@ e acesse `http://localhost:8000`.
 ## Versionamento
 
 O projeto está publicado em [github.com/JServoli/ia-em-jogo](https://github.com/JServoli/ia-em-jogo).
-Cada entrega fica congelada numa tag, e o trabalho continua no `main`:
+Cada entrega corresponde a uma tag ou branch com o nome dela:
 
-| Entrega | Tag | Situação |
+| Entrega | Onde | Situação |
 |---|---|---|
-| 1 - Esqueleto semântico | [`entrega-1`](https://github.com/JServoli/ia-em-jogo/releases/tag/entrega-1) | Pronta |
-| 2 - Estilo e responsividade | `entrega-2` | A fazer |
+| 1 - Esqueleto semântico | tag [`entrega-1`](https://github.com/JServoli/ia-em-jogo/releases/tag/entrega-1) | Pronta |
+| 2 - Estilo e responsividade | branch [`entrega-2`](https://github.com/JServoli/ia-em-jogo/tree/entrega-2) | Pronta |
 | 3 - Formulário e refinamento | `entrega-3` | A fazer |
 
-Fluxo para as próximas entregas:
+Fluxo da Entrega 2, numa branch com o nome pedido pelo professor:
 
 ```powershell
+git switch -c entrega-2
 git add .
 git commit -m "Entrega 2: estilo e responsividade"
-git push
-git tag entrega-2
-git push origin entrega-2
+git push -u origin entrega-2
 ```
 
 Cada integrante deve fazer commits com a própria conta, porque o histórico conta na avaliação.
@@ -149,10 +173,13 @@ Cada integrante deve fazer commits com a própria conta, porque o histórico con
 ## Uso de IA
 
 O grupo usou o Claude (Anthropic) na pesquisa das fontes, na estrutura HTML, nos textos, nos
-gráficos, na validação e na documentação. A revisão técnica do código gerado é feita pelo grupo.
-Os prompts usados, na íntegra, e a revisão estão em
-[docs/registro-uso-ia-entrega-1.md](docs/registro-uso-ia-entrega-1.md).
+gráficos, no CSS, nos testes, na validação e na documentação. A revisão técnica do código gerado é
+feita pelo grupo. Os prompts usados, na íntegra, e a revisão de cada entrega estão em:
+
+- [docs/registro-uso-ia-entrega-1.md](docs/registro-uso-ia-entrega-1.md)
+- [docs/registro-uso-ia-entrega-2.md](docs/registro-uso-ia-entrega-2.md)
 
 ## Tecnologias
 
-HTML5 na Entrega 1. CSS próprio a partir da Entrega 2. Sem frameworks e sem JavaScript.
+HTML5 e CSS3 próprio (Grid, Flexbox, variáveis, media queries e container queries). Sem frameworks
+e sem JavaScript.
