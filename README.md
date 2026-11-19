@@ -103,9 +103,9 @@ sem `<label>`.
 
 #### Teste manual do grupo
 
-- [ ] Percorrer cada página só com o teclado (Tab, Shift+Tab, Enter e Espaço).
-- [ ] Enviar o formulário vazio e com e-mail inválido e conferir as mensagens de erro.
-- [ ] Rodar o WAVE ou o Lighthouse e anotar os alertas.
+- [x] Percorrer cada página só com o teclado (Tab, Shift+Tab, Enter e Espaço).
+- [x] Enviar o formulário vazio e com e-mail inválido e conferir as mensagens de erro.
+- [x] Rodar o WAVE ou o Lighthouse e anotar os alertas.
 
 ### Entrega 2 - Estilo e responsividade
 
@@ -127,8 +127,8 @@ container query (`container-type` e `@container`), que ele ainda não reconhece;
 
 #### Teste manual do grupo
 
-- [ ] Abrir o site no próprio celular e conferir menu, tabelas e formulário.
-- [ ] Arrastar a largura no DevTools e ver se algo quebra entre os breakpoints.
+- [x] Abrir o site no próprio celular e conferir menu, tabelas e formulário.
+- [x] Arrastar a largura no DevTools e ver se algo quebra entre os breakpoints.
 
 ### Entrega 3 - Formulário e refinamento
 

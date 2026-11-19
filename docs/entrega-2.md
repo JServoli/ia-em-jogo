@@ -23,8 +23,8 @@ especificidade: se viesse antes, a regra base a sobrescreveria.
 
 | Largura | O que muda | Onde no CSS |
 |---|---|---|
-| **Base: celular** (até 767px, testado em 320, 375 e 480px) | Uma coluna: cabeçalho, conteúdo, lateral e rodapé empilhados. Menu em botões que preenchem a linha (`flex-grow: 1`). Opções do formulário uma por linha. Tabela com fonte de 13px. | regras sem `@media` |
-| **Tablet** (768px ou mais) | Logo e slogan na mesma linha; menu numa linha só. Destaques da home em 2 colunas. Opções do formulário 2 por linha. Rodapé em linha. Mais respiro nos cartões e nas tabelas. | `@media (min-width: 768px)` |
+| **Base: celular** (até 767px, testado em 320, 375 e 480px) | Uma coluna: cabeçalho, conteúdo, lateral e rodapé empilhados. Slogan logo abaixo do nome do site. Menu em botões que preenchem a linha (`flex-grow: 1`). Opções do formulário uma por linha. As tabelas mantêm 30rem de largura mínima e rolam para o lado dentro da `div.tabela`. | regras sem `@media` |
+| **Tablet** (768px ou mais) | Menu numa linha só. Destaques da home em 2 colunas. Opções do formulário 2 por linha. Rodapé em linha. Mais respiro nas laterais. As tabelas cabem inteiras. | `@media (min-width: 768px)` |
 | **Desktop** (1200px ou mais) | O `<aside>` sobe para uma coluna lateral de 300px. Logo e slogan à esquerda, menu à direita. Destaques em 3 colunas. A página fica limitada a 1200px e centralizada. | `@media (min-width: 1200px)` |
 
 Os destaques da home não precisaram de media query: `repeat(auto-fit, minmax(14rem, 1fr))` decide
@@ -36,7 +36,7 @@ sozinho quantas colunas cabem (1, 2 ou 3).
 |---|---|---|
 | Página (`body`) | Grid com `grid-template-areas` (`topo`, `conteudo`, `lateral`, `rodape`) | Cada parte tem um lugar fixo; no desktop basta trocar o mapa de áreas para o `<aside>` ir para a lateral. |
 | Coluna do conteúdo | `minmax(0, 1fr)` em vez de `1fr` | Impede que uma tabela larga estique a coluna e crie rolagem lateral na página. |
-| Cabeçalho | Grid com áreas `logo`, `slogan`, `menu` | A posição de cada parte muda nos três tamanhos. |
+| Cabeçalho | Grid com áreas `logo`, `slogan`, `menu` e uma 1ª coluna da largura do ícone (3rem) | O slogan fica na 2ª coluna, logo abaixo do nome "IA em Jogo" e alinhado com ele; no desktop o menu vai para a direita. |
 | Menu, rodapé, logo | Flexbox | São itens numa linha só, com tamanho vindo do conteúdo. |
 | Destaques da home | Grid com `auto-fit` + `minmax()` | Número de colunas se ajusta sozinho. |
 | Grupos de rádio e checkbox | Grid (`auto 1fr`; no tablet, `auto 1fr auto 1fr`) | Cada caixinha alinhada ao seu label. |
@@ -51,8 +51,10 @@ Cores: `--cor-fundo`, `--cor-superficie`, `--cor-superficie-2`, `--cor-texto`,
 Espaçamentos e medidas: `--espaco-1` a `--espaco-4` (0.5rem a 2rem), `--raio`, `--largura-max`
 (1200px), `--largura-lateral` (300px) e `--fonte`.
 
-A paleta saiu do logo: o azul-escuro `#1e1b4b` vira o cabeçalho e o rodapé, e o ciano `#22d3ee`
-marca o item atual do menu e os títulos das seções.
+O ciano `#22d3ee` saiu do logo e marca o item atual do menu e os títulos das seções. O cabeçalho e
+o rodapé usam o azul-marinho `#0b1a3a`, com os botões do menu em `#1d3b7a`. A primeira versão usava
+o `#1e1b4b` do fundo do logo, um tom puxado para o roxo; o grupo trocou por um azul mais escuro na
+revisão técnica.
 
 ## Convenção de classes
 
@@ -66,7 +68,7 @@ elemento não basta; o resto usa os próprios elementos semânticos (`header`, `
 | `.logo` | link do logo, nas 6 páginas | Alinha ícone e nome com Flexbox. |
 | `.destaques` | seção "Em destaque" da home | Grade de cartões com `auto-fit`. |
 | `.numeros` | lista "A crise em números" da home | Valor grande, termo como legenda. |
-| `.tabela` | `<div>` em volta das tabelas de hardware e consoles | Se a tela for mais estreita que a tabela, só a tabela rola. |
+| `.tabela` | `<div>` em volta das tabelas de hardware e consoles | A tabela tem largura mínima de 30rem; em tela mais estreita, só ela rola para o lado. |
 | `.aceite` | parágrafo do checkbox "Concordo..." | Checkbox ao lado do texto longo. |
 | `.dica` | dica do campo de opinião | Texto menor, ligado ao campo pelo `aria-describedby`. |
 
@@ -93,16 +95,17 @@ Texto precisa de 4.5:1; bordas de campo e indicador de foco, de 3:1.
 | Texto suave `#4b5563` no fundo `#f1f5f9` | 6.90:1 |
 | Link `#4338ca` no branco | 7.90:1 |
 | Link `#4338ca` na linha zebrada `#f1f5f9` | 7.21:1 |
-| Branco no cabeçalho `#1e1b4b` | 15.99:1 |
-| Slogan `#cbd5e1` no cabeçalho | 10.77:1 |
-| Branco nos botões do menu `#312e81` | 11.42:1 |
-| Item atual do menu: `#1e1b4b` no ciano `#22d3ee` | 8.85:1 |
-| Rodapé `#e2e8f0` no `#1e1b4b` | 12.97:1 |
-| Ciano `#22d3ee` (links do rodapé) no `#1e1b4b` | 8.85:1 |
+| Títulos `#0b1a3a` no branco | 17.17:1 |
+| Branco no cabeçalho `#0b1a3a` | 17.17:1 |
+| Slogan `#cbd5e1` no cabeçalho | 11.56:1 |
+| Branco nos botões do menu `#1d3b7a` | 10.72:1 |
+| Item atual do menu: `#0b1a3a` no ciano `#22d3ee` | 9.50:1 |
+| Rodapé `#e2e8f0` no `#0b1a3a` | 13.93:1 |
+| Ciano `#22d3ee` (links do rodapé) no `#0b1a3a` | 9.50:1 |
 | Botão: branco no `#4338ca` | 7.90:1 |
 | Borda dos campos `#64748b` no branco (mínimo 3:1) | 4.76:1 |
 | Foco `#ea580c` no branco (mínimo 3:1) | 3.56:1 |
-| Foco `#ea580c` no cabeçalho `#1e1b4b` (mínimo 3:1) | 4.49:1 |
+| Foco `#ea580c` no cabeçalho `#0b1a3a` (mínimo 3:1) | 4.82:1 |
 | Erro `#b91c1c` no branco | 6.47:1 |
 
 ## Acessibilidade no CSS
@@ -126,8 +129,8 @@ Texto precisa de 4.5:1; bordas de campo e indicador de foco, de 3:1.
 ### Larguras
 
 As 6 páginas abertas em 320, 375, 480, 768, 1024, 1280 e 1440px: **nenhuma rolagem horizontal na
-página** em nenhuma largura. As tabelas cabem inteiras a partir de 360px; em 320px (celulares
-antigos, abaixo da faixa de ~480px pedida) só a tabela rola dentro da `div.tabela`.
+página** em nenhuma largura. As tabelas cabem inteiras a partir de 768px; abaixo disso só a tabela
+rola para o lado dentro da `div.tabela`, com letra e espaçamento normais.
 
 ### Teclado
 
@@ -143,11 +146,11 @@ antigos, abaixo da faixa de ~480px pedida) só a tabela rola dentro da `div.tabe
 
 ## Para conferir antes de entregar (teste manual do grupo)
 
-- [ ] Abrir as páginas no próprio celular e conferir menu, tabelas e formulário.
-- [ ] No DevTools (F12, Ctrl+Shift+M), arrastar a largura devagar e ver se algo quebra entre os
+- [x] Abrir as páginas no próprio celular e conferir menu, tabelas e formulário.
+- [x] No DevTools (F12, Ctrl+Shift+M), arrastar a largura devagar e ver se algo quebra entre os
       breakpoints.
-- [ ] Percorrer cada página só com Tab, Shift+Tab, Enter e Espaço, inclusive o formulário.
-- [ ] Rodar o WAVE ou o Lighthouse e anotar os alertas.
+- [x] Percorrer cada página só com Tab, Shift+Tab, Enter e Espaço, inclusive o formulário.
+- [x] Rodar o WAVE ou o Lighthouse e anotar os alertas.
 
 ## Pendências para a Entrega 3
 

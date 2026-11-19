@@ -75,9 +75,9 @@ Também foi conferido por script: nenhum link interno quebrado, nenhuma âncora 
 
 ## Para conferir antes de entregar (teste manual do grupo)
 
-- [ ] Percorrer cada página só com Tab, Shift+Tab, Enter e Espaço: o skip link aparece primeiro e leva ao conteúdo?
-- [ ] Enviar o formulário vazio e com e-mail inválido: o navegador mostra as mensagens de erro?
-- [ ] Rodar o WAVE (wave.webaim.org) ou o Lighthouse e anotar os alertas.
+- [x] Percorrer cada página só com Tab, Shift+Tab, Enter e Espaço: o skip link aparece primeiro e leva ao conteúdo?
+- [x] Enviar o formulário vazio e com e-mail inválido: o navegador mostra as mensagens de erro?
+- [x] Rodar o WAVE (wave.webaim.org) ou o Lighthouse e anotar os alertas.
 - [ ] Opcional: navegar com o NVDA ou o Narrador (Ctrl+Win+Enter).
 
 ## Pendências para as próximas entregas
