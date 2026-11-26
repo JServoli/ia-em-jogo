@@ -71,6 +71,7 @@ h2,
 h3 {
   line-height: 1.25;
   color: var(--cor-primaria);
+  text-wrap: balance; /* linhas do título equilibradas, sem palavra sozinha (Entrega 3) */
 }
 
 h1 {
@@ -469,6 +470,19 @@ textarea:user-invalid {
   border-width: 2px;
 }
 
+/* :has() (Entrega 3): o label do campo inválido também fica vermelho, e o
+   grupo de rádios ganha a borda de erro. A mensagem do navegador continua
+   aparecendo, então a cor não é o único sinal. */
+form > p:has(:user-invalid) label,
+fieldset:has(:user-invalid) legend {
+  color: var(--cor-erro);
+}
+
+fieldset:has(:user-invalid) {
+  border-color: var(--cor-erro);
+  border-width: 2px;
+}
+
 /* Grupos de opções: cada rádio ou checkbox ao lado do seu label */
 fieldset {
   display: grid;
@@ -488,8 +502,8 @@ legend {
 
 input[type="radio"],
 input[type="checkbox"] {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;  /* 24px: alvo mínimo de toque da WCAG 2.2 (antes 1.25rem = 20px) */
+  height: 1.5rem;
   margin: 0;
   accent-color: var(--cor-link);
 }

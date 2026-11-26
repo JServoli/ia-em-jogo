@@ -2,6 +2,8 @@
 
 > Como a inteligência artificial está mudando o preço da diversão.
 
+**Site publicado:** [jservoli.github.io/ia-em-jogo](https://jservoli.github.io/ia-em-jogo/)
+
 Site sobre como o crescimento da inteligência artificial está encarecendo jogos, hardware e
 consoles. Projeto Integrador da disciplina **Interface Web com HTML e CSS** (UNIVÁS, 2026-2),
 construído em três entregas: HTML semântico, depois CSS responsivo, depois formulário e
@@ -35,15 +37,16 @@ O site explica uma corrente de causa e efeito, com números e fontes em cada pá
 - `aria-current="page"` no item do menu da página atual.
 - Tabelas com `<caption>` e `<th scope>`; gráficos em `<figure>` com `alt` que descreve os números.
 - Formulário com `<label>` em todos os campos, `<fieldset>`/`<legend>` nos grupos de opções e
-  validação nativa do HTML5.
+  validação só com HTML5 (`required`, `type="email"`, `pattern`, `minlength`), sem JavaScript.
 - Foco visível em todo elemento (`:focus-visible`), skip link que aparece no primeiro Tab e
   contraste mínimo de 4.5:1 em todo texto.
 - Todo número do site tem a fonte listada no fim da página onde aparece.
 - Nomes de arquivos em minúsculas, sem acento e sem espaço; classes CSS em português, minúsculas e
   com hífen (`.pular`, `.destaques`, `.tabela`).
 
-As justificativas de cada decisão estão em [docs/entrega-1.md](docs/entrega-1.md) (estrutura) e
-[docs/entrega-2.md](docs/entrega-2.md) (estilo e responsividade).
+As justificativas de cada decisão estão em [docs/entrega-1.md](docs/entrega-1.md) (estrutura),
+[docs/entrega-2.md](docs/entrega-2.md) (estilo e responsividade) e
+[docs/entrega-3.md](docs/entrega-3.md) (formulário, acessibilidade e publicação).
 
 ## Páginas
 
@@ -75,8 +78,10 @@ ia-em-jogo/
 ├── docs/
 │   ├── entrega-1.md                  decisões de estrutura, checklist e validação
 │   ├── entrega-2.md                  breakpoints, layout, variáveis, contraste e testes
+│   ├── entrega-3.md                  formulário, revisão de acessibilidade e publicação
 │   ├── registro-uso-ia-entrega-1.md
-│   └── registro-uso-ia-entrega-2.md
+│   ├── registro-uso-ia-entrega-2.md
+│   └── registro-uso-ia-entrega-3.md
 ├── .gitignore
 └── README.md
 ```
@@ -132,10 +137,20 @@ container query (`container-type` e `@container`), que ele ainda não reconhece;
 
 ### Entrega 3 - Formulário e refinamento
 
-- [ ] Trocar o `method="post"` do formulário por `get` ou justificar a escolha (no GitHub Pages,
-      `post` responde com erro 405).
-- [ ] Conferir o contraste de 4.5:1 das cores, inclusive nos gráficos SVG.
-- [ ] Fazer os ajustes finais.
+- [x] Trocar o `method="post"` do formulário por `get` (no GitHub Pages, `post` responde com erro
+      405) e avisar na página que as respostas aparecem no endereço.
+- [x] Validar o nome com `pattern` (sem números) e ligar dicas aos campos com `aria-describedby`.
+- [x] Marcar o label e o grupo do campo inválido em vermelho com `:has(:user-invalid)`.
+- [x] Aumentar rádios e checkboxes para 24px (alvo mínimo da WCAG 2.2).
+- [x] Conferir o contraste de 4.5:1 das cores, inclusive nos gráficos SVG (barra cinza do gráfico do
+      PS5 escurecida para 3:1 ou mais).
+- [x] Testar o envio: vazio, com dados inválidos e com dados válidos.
+- [x] Publicar o site no GitHub Pages.
+
+#### Validação no W3C
+
+Em 26/11/2026: **0 erros e 0 avisos** no HTML das 6 páginas. No CSS, o validador continua acusando
+só a container query, que ele ainda não reconhece; detalhes em [docs/entrega-3.md](docs/entrega-3.md).
 
 ## Como abrir
 
@@ -150,22 +165,28 @@ e acesse `http://localhost:8000`.
 
 ## Versionamento
 
-O projeto está publicado em [github.com/JServoli/ia-em-jogo](https://github.com/JServoli/ia-em-jogo).
-Cada entrega corresponde a uma tag ou branch com o nome dela:
+O código está em [github.com/JServoli/ia-em-jogo](https://github.com/JServoli/ia-em-jogo), e o
+site, publicado pelo GitHub Pages a partir do `main`, em
+[jservoli.github.io/ia-em-jogo](https://jservoli.github.io/ia-em-jogo/). Cada entrega corresponde
+a uma tag ou branch com o nome dela:
 
 | Entrega | Onde | Situação |
 |---|---|---|
 | 1 - Esqueleto semântico | tag [`entrega-1`](https://github.com/JServoli/ia-em-jogo/releases/tag/entrega-1) | Pronta |
 | 2 - Estilo e responsividade | branch [`entrega-2`](https://github.com/JServoli/ia-em-jogo/tree/entrega-2) | Pronta |
-| 3 - Formulário e refinamento | `entrega-3` | A fazer |
+| 3 - Formulário e refinamento | branch [`entrega-3`](https://github.com/JServoli/ia-em-jogo/tree/entrega-3) + [site publicado](https://jservoli.github.io/ia-em-jogo/) | Pronta |
 
-Fluxo da Entrega 2, numa branch com o nome pedido pelo professor:
+Fluxo de cada entrega, numa branch com o nome dela, depois levada para o `main` (que é o que o
+GitHub Pages publica):
 
 ```powershell
-git switch -c entrega-2
+git switch -c entrega-3
 git add .
-git commit -m "Entrega 2: estilo e responsividade"
-git push -u origin entrega-2
+git commit -m "Entrega 3: formulário, acessibilidade e publicação"
+git push -u origin entrega-3
+git switch main
+git merge --ff-only entrega-3
+git push
 ```
 
 Cada integrante deve fazer commits com a própria conta, porque o histórico conta na avaliação.
@@ -178,8 +199,9 @@ feita pelo grupo. Os prompts usados, na íntegra, e a revisão de cada entrega e
 
 - [docs/registro-uso-ia-entrega-1.md](docs/registro-uso-ia-entrega-1.md)
 - [docs/registro-uso-ia-entrega-2.md](docs/registro-uso-ia-entrega-2.md)
+- [docs/registro-uso-ia-entrega-3.md](docs/registro-uso-ia-entrega-3.md)
 
 ## Tecnologias
 
-HTML5 e CSS3 próprio (Grid, Flexbox, variáveis, media queries e container queries). Sem frameworks
-e sem JavaScript.
+HTML5 e CSS3 próprio (Grid, Flexbox, variáveis, media queries, container queries e `:has()`).
+Sem frameworks e sem JavaScript. Hospedagem no GitHub Pages.
